@@ -7,23 +7,50 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+final class GameViewController: UIViewController {
+	
+	private let gameView = GameViewCell()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+		view.backgroundColor = .systemGray4
+		configGameViewCell()
     }
-    
+	
+	func configGameViewCell() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: 30, height: 30)
+		flowLayout.minimumLineSpacing = 10
+		flowLayout.minimumInteritemSpacing = 10
+		flowLayout.collectionView?.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+		
+		let gameCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+		gameCollectionView.dataSource = self
+		gameCollectionView.delegate = self
+		
+		gameCollectionView.backgroundColor = .white
+		gameCollectionView.register(GameViewCell.self, forCellWithReuseIdentifier: "Cell")
+		gameCollectionView.showsVerticalScrollIndicator = false
+		gameCollectionView.showsHorizontalScrollIndicator = false
+		gameCollectionView.backgroundColor = .white
+		view.addSubview(gameCollectionView)
+	}
+	
+}
 
-    /*
-    // MARK: - Navigation
+extension GameViewController: UICollectionViewDataSource {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return 5
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! GameViewCell
+		return cell
+	}
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension GameViewController: UICollectionViewDelegate {
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		print(#function, indexPath.row)
+	}
 }
