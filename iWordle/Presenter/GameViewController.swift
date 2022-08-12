@@ -9,38 +9,61 @@ import UIKit
 
 final class GameViewController: UIViewController {
 	
-	private let gameView = GameViewCell()
+	private let lineView = LineView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		view.backgroundColor = .systemGray4
-		configGameViewCell()
-    }
-	
-	func configGameViewCell() {
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: 30, height: 30)
-		flowLayout.minimumLineSpacing = 10
-		flowLayout.minimumInteritemSpacing = 10
-		flowLayout.collectionView?.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+		view.backgroundColor = .white
+		configNavBarUI(withTitle: "iWordle!", prefersLargerTitle: true, isHidden: false)
+		navigationController?.navigationBar.barStyle = .black
 		
+		configUI()
+    }
+
+	func configUI() {
+		configLineView()
+		configGameView()
+	}
+	
+	func configLineView() {
+		view.addSubview(lineView)
+		lineView.setCenterX(inView: view)
+		lineView.setAnchorTRBL(top: view.safeAreaLayoutGuide.topAnchor,
+								paddingTop: 0)
+		lineView.backgroundColor = .brown
+		lineView.setSize(height: 100, width: view.frame.width)
+	}
+	
+	func configGameView() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(
+			width: view.frame.size.width / 5,
+			height: view.frame.size.width / 5
+		)
+		flowLayout.minimumLineSpacing = 5
+		flowLayout.minimumInteritemSpacing = 0
+
 		let gameCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
 		gameCollectionView.dataSource = self
 		gameCollectionView.delegate = self
-		
+
 		gameCollectionView.backgroundColor = .white
 		gameCollectionView.register(GameViewCell.self, forCellWithReuseIdentifier: "Cell")
 		gameCollectionView.showsVerticalScrollIndicator = false
 		gameCollectionView.showsHorizontalScrollIndicator = false
 		gameCollectionView.backgroundColor = .white
+		gameCollectionView.frame.size.width = view.frame.size.width
+		gameCollectionView.frame.size.height = gameCollectionView.collectionViewLayout.collectionViewContentSize.height
+		view.layoutIfNeeded()
 		view.addSubview(gameCollectionView)
+//		gameCollectionView.setAnchorTRBL(bottom: lineView.bottomAnchor, paddingBottom: 10)
 	}
-	
+
 }
 
 extension GameViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 5
+		return 25
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
