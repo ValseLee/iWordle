@@ -23,8 +23,7 @@ final class GameViewCell: UICollectionViewCell {
 		super.init(frame: frame)
 		addSubview(imageView)
 		imageView.setAnchorTRBL(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor,
-								paddingTop: 10, paddingRight: 10, paddingBottom: 10, paddingLeft: 10)
-		imageView.setSize(height: 10, width: 10)
+								paddingTop: 5, paddingRight: 5, paddingBottom: 5, paddingLeft: 5)
 	}
 	
 	required init?(coder: NSCoder) {
