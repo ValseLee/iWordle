@@ -49,8 +49,9 @@ final class FirstViewController: UIViewController {
 	
 	func configStartBtn() {
 		view.addSubview(startBtn)
-		startBtn.setAnchorTRBL(bottom: view.safeAreaLayoutGuide.bottomAnchor,
-							   paddingBottom: 75)
+//		startBtn.setAnchorTRBL(bottom: view.safeAreaLayoutGuide.bottomAnchor,
+//							   paddingBottom: 75)
+		startBtn.setAnchor(anchorTo: [.bottom(padding: 75, isToSafeArea: true)], inView: view)
 		startBtn.setCenterX(inView: view)
 		startBtn.setSize(height: 75, width: 250)
 	}

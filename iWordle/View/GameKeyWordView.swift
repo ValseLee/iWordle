@@ -34,9 +34,9 @@ final class GameKeyWordView: UIView {
 	
 	func configGameWordLabel() {
 		addSubview(gameWordLabel)
-		gameWordLabel.setAnchorTRBL(top: topAnchor, bottom: bottomAnchor,
-									paddingTop: 10, paddingBottom: 10
-		)
+		gameWordLabel.setAnchor(anchorTo: [.top(padding: 10, isToSafeArea: true),
+										   .bottom(padding: 10, isToSafeArea: false)],
+								inView: self)
 		gameWordLabel.setCenterX(inView: self)
 	}
 }
