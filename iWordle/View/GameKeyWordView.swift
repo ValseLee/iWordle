@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LineView: UIView {
+final class GameKeyWordView: UIView {
 	
 	private let imageEx: UIImageView = {
 		let image = UIImageView()
