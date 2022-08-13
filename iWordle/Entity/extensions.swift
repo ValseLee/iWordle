@@ -9,7 +9,52 @@ import Foundation
 import UIKit
 
 extension UIView {
-	func setAnchorTRBL(top: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, paddingTop: CGFloat = 0, paddingRight: CGFloat = 0, paddingBottom: CGFloat = 0, paddingLeft: CGFloat = 0) {
+	enum AnchorTo {
+		case top(padding: CGFloat, isToSafeArea: Bool)
+		case bottom(padding: CGFloat, isToSafeArea: Bool)
+		case leading(padding: CGFloat, isToSafeArea: Bool)
+		case trailing(padding: CGFloat, isToSafeArea: Bool)
+	}
+	
+	func setAnchor(anchorTo: [AnchorTo], inView view: UIView) {
+		translatesAutoresizingMaskIntoConstraints = false
+		anchorTo.forEach { direction in
+			switch direction {
+				case .top(let constants, let isToSafeAreaLayoutGuide):
+					if isToSafeAreaLayoutGuide {
+						self.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: constants).isActive = true
+					} else {
+						self.topAnchor.constraint(equalTo: view.topAnchor, constant: constants).isActive = true
+					}
+					break
+				case .bottom(let constants, let isToSafeAreaLayoutGuide):
+					if isToSafeAreaLayoutGuide {
+						self.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -constants).isActive = true
+					} else {
+						self.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -constants).isActive = true
+					}
+					break
+				case .leading(let constants, let isToSafeAreaLayoutGuide):
+					if isToSafeAreaLayoutGuide {
+						self.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: constants).isActive = true
+					} else {
+						self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constants).isActive = true
+					}
+					break
+				case .trailing(let constants, let isToSafeAreaLayoutGuide):
+					if isToSafeAreaLayoutGuide {
+						self.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -constants).isActive = true
+					} else {
+						self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constants).isActive = true
+					}
+					break
+			}
+		}
+	}
+	
+	func setAnchorTRBL(
+		top: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil,
+		paddingTop: CGFloat = 0, paddingRight: CGFloat = 0, paddingBottom: CGFloat = 0, paddingLeft: CGFloat = 0) {
 			
 		translatesAutoresizingMaskIntoConstraints = false
 		
