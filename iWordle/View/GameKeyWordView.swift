@@ -8,16 +8,12 @@
 import UIKit
 
 final class GameKeyWordView: UIView {
-	
-	private let imageEx: UIImageView = {
-		let image = UIImageView()
-		image.backgroundColor = .brown
-		return image
-	}()
-	
-	private let mainTextLabel: UILabel = {
+	private let gameWordLabel: UILabel = {
 		let tl = UILabel()
-		tl.text = "the word is here"
+		// MARK: 나중에 API로 받아온 텍스트로 변경
+		tl.text = "CLEAR".uppercased()
+		tl.font = UIFont.boldSystemFont(ofSize: 24)
+		tl.textColor = .black
 		return tl
 	}()
 	
@@ -32,9 +28,15 @@ final class GameKeyWordView: UIView {
 	
 	// MARK: Need Config UI
 	func configUI() {
-		addSubview(imageEx)
-		imageEx.setCenterY(inView: self)
-		imageEx.setCenterX(inView: self)
-		imageEx.setSize(height: 50, width: 50)
+		backgroundColor = .white
+		configGameWordLabel()
+	}
+	
+	func configGameWordLabel() {
+		addSubview(gameWordLabel)
+		gameWordLabel.setAnchorTRBL(top: topAnchor, bottom: bottomAnchor,
+									paddingTop: 10, paddingBottom: 10
+		)
+		gameWordLabel.setCenterX(inView: self)
 	}
 }

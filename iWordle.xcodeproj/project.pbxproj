@@ -16,7 +16,8 @@
 		7015AB5D28A51F6800FC2754 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB5C28A51F6800FC2754 /* extensions.swift */; };
 		7015AB6528A52B4100FC2754 /* GameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB6428A52B4100FC2754 /* GameViewCell.swift */; };
 		7015AB6728A52CC800FC2754 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB6628A52CC800FC2754 /* GameViewController.swift */; };
-		708EA3F028A678EA00C7FE63 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708EA3EF28A678EA00C7FE63 /* LineView.swift */; };
+		708EA3F028A678EA00C7FE63 /* GameKeyWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */; };
+		70D5211528A73E3C00F7FC97 /* WordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5211428A73E3C00F7FC97 /* WordAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +32,8 @@
 		7015AB5C28A51F6800FC2754 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		7015AB6428A52B4100FC2754 /* GameViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewCell.swift; sourceTree = "<group>"; };
 		7015AB6628A52CC800FC2754 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		708EA3EF28A678EA00C7FE63 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKeyWordView.swift; sourceTree = "<group>"; };
+		70D5211428A73E3C00F7FC97 /* WordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				7015AB6428A52B4100FC2754 /* GameViewCell.swift */,
-				708EA3EF28A678EA00C7FE63 /* LineView.swift */,
+				708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,6 +101,7 @@
 		7015AB5428A51C5B00FC2754 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				70D5211428A73E3C00F7FC97 /* WordAPI.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -195,7 +198,8 @@
 				7015AB4128A51B4800FC2754 /* SceneDelegate.swift in Sources */,
 				7015AB6528A52B4100FC2754 /* GameViewCell.swift in Sources */,
 				7015AB6728A52CC800FC2754 /* GameViewController.swift in Sources */,
-				708EA3F028A678EA00C7FE63 /* LineView.swift in Sources */,
+				708EA3F028A678EA00C7FE63 /* GameKeyWordView.swift in Sources */,
+				70D5211528A73E3C00F7FC97 /* WordAPI.swift in Sources */,
 				7015AB5D28A51F6800FC2754 /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
