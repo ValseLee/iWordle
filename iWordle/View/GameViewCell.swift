@@ -7,7 +7,16 @@
 
 import UIKit
 
+// MARK: 뷰가 아니라 뷰컨인줄. 구현 끝나면 분리 필요
 final class GameViewCell: UICollectionViewCell {
+	
+	private var textCheck: String? {
+		didSet {
+			if textCheck != "" {
+				chracterTextView.isUserInteractionEnabled = false
+			}
+		}
+	}
 	
 	public let chracterTextView: UITextView = {
 		let tv = UITextView()
@@ -15,9 +24,9 @@ final class GameViewCell: UICollectionViewCell {
 		tv.layer.borderColor = UIColor.black.cgColor
 		tv.layer.borderWidth = 0.5
 		tv.font = UIFont.boldSystemFont(ofSize: 16)
-		tv.autocapitalizationType = .none
+		tv.autocapitalizationType = .allCharacters
 		tv.autocorrectionType = .no
-		tv.keyboardType = .asciiCapable
+		tv.keyboardType = .alphabet
 		tv.textAlignment = .center
 		return tv
 	}()
@@ -47,6 +56,14 @@ extension GameViewCell: UITextViewDelegate {
 		guard let str = textView.text else { return true }
 		let maxLength = str.count + text.count - range.length
 		return maxLength <= 1
+	}
+	
+	func textViewDidEndEditing(_ textView: UITextView) {
+		guard let str = textView.text else { return }
+		textCheck = str
+		UserInput.shared.userInput += textCheck!
+		print(UserInput.shared.userInput)
+		UserInput.shared.checkUsersInput()
 	}
 }
 

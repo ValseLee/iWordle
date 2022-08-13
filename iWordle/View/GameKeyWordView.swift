@@ -11,7 +11,7 @@ final class GameKeyWordView: UIView {
 	private let gameWordLabel: UILabel = {
 		let tl = UILabel()
 		// MARK: 나중에 API로 받아온 텍스트로 변경
-		tl.text = "CLEAR".uppercased()
+		tl.text = UserInput.shared.word.uppercased()
 		tl.font = UIFont.boldSystemFont(ofSize: 24)
 		tl.textColor = .black
 		return tl

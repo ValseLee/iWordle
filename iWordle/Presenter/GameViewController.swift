@@ -17,7 +17,6 @@ final class GameViewController: UIViewController {
 		view.backgroundColor = .white
 		configNavBarUI(withTitle: "iWordle!", prefersLargerTitle: false, isHidden: false)
 		navigationController?.navigationBar.barStyle = .black
-		
 		configUI()
     }
 
@@ -62,6 +61,7 @@ final class GameViewController: UIViewController {
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.view.endEditing(true)
 	}
+	
 }
 
 extension GameViewController: UICollectionViewDataSource {
