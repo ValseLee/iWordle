@@ -44,6 +44,7 @@ final class GameViewController: UIViewController {
 		flowLayout.minimumInteritemSpacing = 0
 
 		let gameCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+		view.addSubview(gameCollectionView)
 		gameCollectionView.dataSource = self
 		gameCollectionView.delegate = self
 
@@ -52,11 +53,9 @@ final class GameViewController: UIViewController {
 		gameCollectionView.showsVerticalScrollIndicator = false
 		gameCollectionView.showsHorizontalScrollIndicator = false
 		gameCollectionView.backgroundColor = .white
-		gameCollectionView.frame.size.width = view.frame.size.width
-		gameCollectionView.frame.size.height = gameCollectionView.collectionViewLayout.collectionViewContentSize.height
-		view.layoutIfNeeded()
-		view.addSubview(gameCollectionView)
-//		gameCollectionView.setAnchorTRBL(bottom: lineView.bottomAnchor, paddingBottom: 10)
+		gameCollectionView.setAnchorTRBL(
+			top: lineView.bottomAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor,
+			paddingTop: 10, paddingBottom: 10)
 	}
 
 }
