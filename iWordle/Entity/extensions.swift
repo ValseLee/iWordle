@@ -20,32 +20,32 @@ extension UIView {
 		translatesAutoresizingMaskIntoConstraints = false
 		anchorTo.forEach { direction in
 			switch direction {
-				case .top(let constants, let isToSafeAreaLayoutGuide):
-					if isToSafeAreaLayoutGuide {
-						self.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: constants).isActive = true
+				case .top(let padding, let isToSafeArea):
+					if isToSafeArea {
+						self.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding).isActive = true
 					} else {
-						self.topAnchor.constraint(equalTo: view.topAnchor, constant: constants).isActive = true
+						self.topAnchor.constraint(equalTo: view.topAnchor, constant: padding).isActive = true
 					}
 					break
-				case .bottom(let constants, let isToSafeAreaLayoutGuide):
-					if isToSafeAreaLayoutGuide {
-						self.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -constants).isActive = true
+				case .bottom(let padding, let isToSafeArea):
+					if isToSafeArea {
+						self.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding).isActive = true
 					} else {
-						self.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -constants).isActive = true
+						self.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding).isActive = true
 					}
 					break
-				case .leading(let constants, let isToSafeAreaLayoutGuide):
-					if isToSafeAreaLayoutGuide {
-						self.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: constants).isActive = true
+				case .leading(let padding, let isToSafeArea):
+					if isToSafeArea {
+						self.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding).isActive = true
 					} else {
-						self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constants).isActive = true
+						self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding).isActive = true
 					}
 					break
-				case .trailing(let constants, let isToSafeAreaLayoutGuide):
-					if isToSafeAreaLayoutGuide {
-						self.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -constants).isActive = true
+				case .trailing(let padding, let isToSafeArea):
+					if isToSafeArea {
+						self.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding).isActive = true
 					} else {
-						self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constants).isActive = true
+						self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding).isActive = true
 					}
 					break
 			}
