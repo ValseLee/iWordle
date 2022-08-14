@@ -18,6 +18,7 @@
 		7015AB6728A52CC800FC2754 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB6628A52CC800FC2754 /* GameViewController.swift */; };
 		7064FA9028A90F01000D5A4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7064FA8F28A90F01000D5A4D /* GoogleService-Info.plist */; };
 		708EA3F028A678EA00C7FE63 /* GameKeyWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */; };
+		70AAF91B28A91275005B61D2 /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AAF91A28A91275005B61D2 /* Words.swift */; };
 		70D5211528A73E3C00F7FC97 /* WordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5211428A73E3C00F7FC97 /* WordAPI.swift */; };
 		70D5211728A7A74400F7FC97 /* UserInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5211628A7A74400F7FC97 /* UserInput.swift */; };
 		EEE2C42267C02EE50E35CEFD /* Pods_iWordle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1316AEAAAB1D0AC614022F /* Pods_iWordle.framework */; };
@@ -39,6 +40,7 @@
 		7015AB6628A52CC800FC2754 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		7064FA8F28A90F01000D5A4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKeyWordView.swift; sourceTree = "<group>"; };
+		70AAF91A28A91275005B61D2 /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		70D5211428A73E3C00F7FC97 /* WordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAPI.swift; sourceTree = "<group>"; };
 		70D5211628A7A74400F7FC97 /* UserInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInput.swift; sourceTree = "<group>"; };
 		BD1316AEAAAB1D0AC614022F /* Pods_iWordle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWordle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				70D5211428A73E3C00F7FC97 /* WordAPI.swift */,
+				70AAF91A28A91275005B61D2 /* Words.swift */,
 				70D5211628A7A74400F7FC97 /* UserInput.swift */,
 			);
 			path = Interactor;
@@ -141,7 +144,6 @@
 				524389682446D8C8BF1DBC7E /* Pods-iWordle.debug.xcconfig */,
 				34C660807EB4348A27EB3436 /* Pods-iWordle.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -276,6 +278,7 @@
 				7015AB6728A52CC800FC2754 /* GameViewController.swift in Sources */,
 				708EA3F028A678EA00C7FE63 /* GameKeyWordView.swift in Sources */,
 				70D5211528A73E3C00F7FC97 /* WordAPI.swift in Sources */,
+				70AAF91B28A91275005B61D2 /* Words.swift in Sources */,
 				70D5211728A7A74400F7FC97 /* UserInput.swift in Sources */,
 				7015AB5D28A51F6800FC2754 /* extensions.swift in Sources */,
 			);
