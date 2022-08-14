@@ -6,5 +6,16 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-// Wordle API : https://v1.wordle.k2bd.dev/redoc
+struct Network {
+	static var shared = Network()
+	
+	static func fetchWord() {
+		// fetch word from cloud
+	}
+	
+	static func updateMyWord() {
+		// update my custom word to cloud
+	}
+}

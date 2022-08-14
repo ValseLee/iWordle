@@ -16,12 +16,16 @@
 		7015AB5D28A51F6800FC2754 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB5C28A51F6800FC2754 /* extensions.swift */; };
 		7015AB6528A52B4100FC2754 /* GameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB6428A52B4100FC2754 /* GameViewCell.swift */; };
 		7015AB6728A52CC800FC2754 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB6628A52CC800FC2754 /* GameViewController.swift */; };
+		7064FA9028A90F01000D5A4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7064FA8F28A90F01000D5A4D /* GoogleService-Info.plist */; };
 		708EA3F028A678EA00C7FE63 /* GameKeyWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */; };
 		70D5211528A73E3C00F7FC97 /* WordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5211428A73E3C00F7FC97 /* WordAPI.swift */; };
 		70D5211728A7A74400F7FC97 /* UserInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5211628A7A74400F7FC97 /* UserInput.swift */; };
+		EEE2C42267C02EE50E35CEFD /* Pods_iWordle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1316AEAAAB1D0AC614022F /* Pods_iWordle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34C660807EB4348A27EB3436 /* Pods-iWordle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWordle.release.xcconfig"; path = "Target Support Files/Pods-iWordle/Pods-iWordle.release.xcconfig"; sourceTree = "<group>"; };
+		524389682446D8C8BF1DBC7E /* Pods-iWordle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWordle.debug.xcconfig"; path = "Target Support Files/Pods-iWordle/Pods-iWordle.debug.xcconfig"; sourceTree = "<group>"; };
 		7015AB3B28A51B4800FC2754 /* iWordle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWordle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7015AB3E28A51B4800FC2754 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7015AB4028A51B4800FC2754 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,9 +37,11 @@
 		7015AB5C28A51F6800FC2754 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		7015AB6428A52B4100FC2754 /* GameViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewCell.swift; sourceTree = "<group>"; };
 		7015AB6628A52CC800FC2754 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		7064FA8F28A90F01000D5A4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKeyWordView.swift; sourceTree = "<group>"; };
 		70D5211428A73E3C00F7FC97 /* WordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAPI.swift; sourceTree = "<group>"; };
 		70D5211628A7A74400F7FC97 /* UserInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInput.swift; sourceTree = "<group>"; };
+		BD1316AEAAAB1D0AC614022F /* Pods_iWordle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWordle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEE2C42267C02EE50E35CEFD /* Pods_iWordle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +61,8 @@
 			children = (
 				7015AB3D28A51B4800FC2754 /* iWordle */,
 				7015AB3C28A51B4800FC2754 /* Products */,
+				C569A961795E7B615AADD9E4 /* Pods */,
+				EFCA7423E70A1C85CAC1CA50 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +88,7 @@
 				7015AB4728A51B4900FC2754 /* Assets.xcassets */,
 				7015AB4928A51B4900FC2754 /* LaunchScreen.storyboard */,
 				7015AB4C28A51B4900FC2754 /* Info.plist */,
+				7064FA8F28A90F01000D5A4D /* GoogleService-Info.plist */,
 			);
 			path = iWordle;
 			sourceTree = "<group>";
@@ -125,6 +135,24 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		C569A961795E7B615AADD9E4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				524389682446D8C8BF1DBC7E /* Pods-iWordle.debug.xcconfig */,
+				34C660807EB4348A27EB3436 /* Pods-iWordle.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		EFCA7423E70A1C85CAC1CA50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD1316AEAAAB1D0AC614022F /* Pods_iWordle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +160,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7015AB4F28A51B4900FC2754 /* Build configuration list for PBXNativeTarget "iWordle" */;
 			buildPhases = (
+				A9DCDED68BE0912C24FB30FC /* [CP] Check Pods Manifest.lock */,
 				7015AB3728A51B4800FC2754 /* Sources */,
 				7015AB3828A51B4800FC2754 /* Frameworks */,
 				7015AB3928A51B4800FC2754 /* Resources */,
+				6F7B61E082755E52B5719907 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -184,12 +214,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				7015AB4B28A51B4900FC2754 /* LaunchScreen.storyboard in Resources */,
+				7064FA9028A90F01000D5A4D /* GoogleService-Info.plist in Resources */,
 				7015AB4828A51B4900FC2754 /* Assets.xcassets in Resources */,
 				7015AB4628A51B4800FC2754 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6F7B61E082755E52B5719907 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iWordle/Pods-iWordle-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iWordle/Pods-iWordle-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWordle/Pods-iWordle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9DCDED68BE0912C24FB30FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iWordle-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7015AB3728A51B4800FC2754 /* Sources */ = {
@@ -346,6 +419,7 @@
 		};
 		7015AB5028A51B4900FC2754 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 524389682446D8C8BF1DBC7E /* Pods-iWordle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -375,6 +449,7 @@
 		};
 		7015AB5128A51B4900FC2754 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34C660807EB4348A27EB3436 /* Pods-iWordle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
