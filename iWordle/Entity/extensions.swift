@@ -113,3 +113,11 @@ extension UIViewController {
 		navigationItem.title = title
 	}
 }
+
+// MARK: Error 처리
+enum NetworkError: Error {
+	case networkingError
+	case dataError
+	case parseError
+	case requestError
+}
