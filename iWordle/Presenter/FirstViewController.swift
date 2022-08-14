@@ -28,6 +28,18 @@ final class FirstViewController: UIViewController {
 		return btn
 	}()
 	
+	private let testBtn: UIButton = {
+		let btn = UIButton(type: .system)
+		btn.backgroundColor = .systemGreen
+		btn.setTitle("Test", for: .normal)
+		btn.setTitleColor(UIColor.white, for: .normal)
+		btn.titleLabel?.font = UIFont.systemFont(ofSize: 28)
+		btn.layer.cornerRadius = 75 / 2
+		btn.clipsToBounds = true
+		btn.addTarget(self, action: #selector(testBtnTapped), for: .touchUpInside)
+		return btn
+	}()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		configNavBarUI(withTitle: "", prefersLargerTitle: false, isHidden: false)
@@ -54,6 +66,12 @@ final class FirstViewController: UIViewController {
 		startBtn.setAnchor(anchorTo: [.bottom(padding: 75, isToSafeArea: true)], inView: view)
 		startBtn.setCenterX(inView: view)
 		startBtn.setSize(height: 75, width: 250)
+		
+		view.addSubview(testBtn)
+		testBtn.setAnchorTRBL(bottom: startBtn.topAnchor,
+							  paddingBottom: 15)
+		testBtn.setCenterX(inView: view)
+		testBtn.setSize(height: 75, width: 250)
 	}
 	
 	// MARK: Selectors
@@ -62,5 +80,15 @@ final class FirstViewController: UIViewController {
 		navigationController?.pushViewController(gameScreen, animated: true)
 	}
 	
+	@objc func testBtnTapped() {
+		Network.shared.curlWord { result in
+			switch result {
+				case .success(let words):
+					print(words.wordList!.randomElement()!)
+				case .failure(let error):
+					print(error.localizedDescription)
+			}
+		}
+	}
 }
 
