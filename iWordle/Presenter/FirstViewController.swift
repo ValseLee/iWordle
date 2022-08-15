@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 final class FirstViewController: UIViewController {
-
 	private let gameKeyWordView = GameKeyWordView()
 	
 	private let mainTitleLabel: UILabel = {
@@ -58,16 +58,20 @@ final class FirstViewController: UIViewController {
 	
 	// MARK: Selectors
 	@objc func startBtnTapped() {
-		let gameScreen = GameViewController()
-		navigationController?.pushViewController(gameScreen, animated: true)
-		
+		showLoader(true, withText: nil)
 		Network.shared.curlWord { result in
 			switch result {
-				case .success(let apiWord):
-					print("Data has been setted")
+				case .success(_):
+					print("Data has Setted")
 				case .failure(let error):
 					print(error.localizedDescription)
 			}
+		}
+		showLoader(false, withText: "Welcome!")
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+			let gameScreen = GameViewController()
+			self.navigationController?.pushViewController(gameScreen, animated: true)
 		}
 	}
 }

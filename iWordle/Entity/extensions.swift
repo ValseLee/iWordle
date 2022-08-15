@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import JGProgressHUD
 
 extension UIView {
 	enum AnchorTo {
@@ -93,6 +94,22 @@ extension UIView {
 }
 
 extension UIViewController {
+	static let hud = JGProgressHUD(style: .dark)
+	
+	func showLoader(_ show: Bool, withText text: String?) {
+		view.endEditing(true)
+		UIViewController.hud.textLabel.text = text ?? ""
+		UIViewController.hud.vibrancyEnabled = true
+		UIViewController.hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 5.0, opacity: 0.2)
+		
+		if show {
+			UIViewController.hud.show(in: self.view)
+		} else {
+			UIViewController.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+			UIViewController.hud.dismiss(afterDelay: 0.65, animated: true)
+		}
+	}
+	
 	func configNavBarUI(withTitle title: String, prefersLargerTitle: Bool, isHidden: Bool) {
 		let appearance = UINavigationBarAppearance()
 		appearance.configureWithOpaqueBackground()
