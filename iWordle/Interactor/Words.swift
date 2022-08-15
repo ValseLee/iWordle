@@ -8,9 +8,15 @@
 import Foundation
 
 struct Words {
-	var wordList: [String]?
+	static var shared = Words()
+	lazy var apiWord: String? = "DEBUG: Word hasnt Init Yet"
+	var userInput = ""
 	
-	init(words: [String]) {
-		self.wordList = words
+	mutating func setWord(wordsList: [String]) {
+		apiWord = wordsList.randomElement()!.uppercased()
+	}
+	
+	func checkUsersInput() {
+		print(userInput)
 	}
 }
