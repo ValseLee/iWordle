@@ -701,6 +701,7 @@ PODS:
     - Libuv-gRPC (= 0.0.10)
   - gRPC-Core/Interface (1.44.0)
   - GTMSessionFetcher/Core (2.0.0)
+  - JGProgressHUD (2.2)
   - leveldb-library (1.22.1)
   - Libuv-gRPC (0.0.10):
     - Libuv-gRPC/Implementation (= 0.0.10)
@@ -718,6 +719,7 @@ PODS:
 DEPENDENCIES:
   - FirebaseFirestore
   - FirebaseStorage
+  - JGProgressHUD
 
 SPEC REPOS:
   trunk:
@@ -737,6 +739,7 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - JGProgressHUD
     - leveldb-library
     - Libuv-gRPC
     - nanopb
@@ -759,11 +762,12 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
   GTMSessionFetcher: 681175626052e03fdde7952f7e9c7a9785719506
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
-PODFILE CHECKSUM: 7f5fff3c3307153157eec7d1534f8a6a98743e09
+PODFILE CHECKSUM: 096779619613a9c260cadbb024be2a324bb62c94
 
 COCOAPODS: 1.11.3

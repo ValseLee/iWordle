@@ -8,5 +8,5 @@ target 'iWordle' do
   # Pods for iWordle
 	pod 'FirebaseFirestore'
 	pod 'FirebaseStorage'
-
+	pod 'JGProgressHUD'
 end
