@@ -103,6 +103,7 @@ extension UIViewController {
 		UIViewController.hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 5.0, opacity: 0.2)
 		
 		if show {
+			UIViewController.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
 			UIViewController.hud.show(in: self.view)
 		} else {
 			UIViewController.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
