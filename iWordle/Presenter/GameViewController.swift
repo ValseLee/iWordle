@@ -19,6 +19,11 @@ final class GameViewController: UIViewController {
 		navigationController?.navigationBar.barStyle = .black
 		configUI()
     }
+	
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		gameKeyWordView.configGameWord()
+	}
 
 	func configUI() {
 		configGameKeyWordView()
@@ -41,7 +46,7 @@ final class GameViewController: UIViewController {
 		)
 		flowLayout.minimumLineSpacing = 5
 		flowLayout.minimumInteritemSpacing = 0
-		flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 20)
+		flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 25, bottom: 0, right: 25)
 		
 		let gameCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
 		view.addSubview(gameCollectionView)

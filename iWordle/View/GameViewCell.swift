@@ -61,9 +61,9 @@ extension GameViewCell: UITextViewDelegate {
 	func textViewDidEndEditing(_ textView: UITextView) {
 		guard let str = textView.text else { return }
 		textCheck = str
-		UserInput.shared.userInput += textCheck!
-		print(UserInput.shared.userInput)
-		UserInput.shared.checkUsersInput()
+		Words.shared.userInput += textCheck!
+		print(Words.shared.userInput)
+		Words.shared.checkUsersInput()
 	}
 }
 

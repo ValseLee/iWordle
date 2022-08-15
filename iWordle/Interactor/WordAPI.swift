@@ -9,18 +9,8 @@ import Foundation
 import FirebaseFirestore
 
 struct Network {
-	typealias NetworkCompletion = (Result<Words, NetworkError>) -> Void
+	typealias NetworkCompletion = (Result<String, NetworkError>) -> Void
 	static var shared = Network()
-	
-	func fetchWord() {
-		// fetch word from cloud
-		Firestore.firestore().collection("words").getDocuments { (snapshot, error) in
-			snapshot?.documents.forEach({ document in
-				let array = document.data()
-				print(array)
-			})
-		}
-	}
 	
 	// MARK: get github 5 letters word list
 	func curlWord(completion: @escaping NetworkCompletion) {
@@ -53,12 +43,26 @@ struct Network {
 			let result = str.map { substring in
 				String(substring)
 			}
-			completion(.success(.init(words: result)))
+			
+			// MARK: Word been setted by Singletone
+			Words.shared.setWord(wordsList: result)
+			completion(.success(Words.shared.apiWord
+								?? "DEBUG: api Words hasnt been setted properly"))
 		}
 		task.resume()
 	}
 	
+	// MARK: 구현 전
 	func updateMyWord() {
 		// update my custom word to cloud
+	}
+	
+	func fetchWord() {
+		// fetch word from cloud
+		Firestore.firestore().collection("words").getDocuments { (snapshot, error) in
+			snapshot?.documents.forEach({ document in
+				let array = document.data()
+			})
+		}
 	}
 }
