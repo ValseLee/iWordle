@@ -10,13 +10,7 @@ import UIKit
 // MARK: 뷰가 아니라 뷰컨인줄. 구현 끝나면 분리 필요
 final class GameViewCell: UICollectionViewCell {
 	
-	private var textCheck: String? {
-		didSet {
-			if textCheck != "" {
-				chracterTextView.isUserInteractionEnabled = false
-			}
-		}
-	}
+	public var userInput = Words.shared.userInput
 	
 	public let chracterTextView: UITextView = {
 		let tv = UITextView()
@@ -49,6 +43,10 @@ final class GameViewCell: UICollectionViewCell {
 		addSubview(chracterTextView)
 		chracterTextView.setAnchorTRBL(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor)
 	}
+	
+//	func changeTextViewUI() {
+//		
+//	}
 }
 
 extension GameViewCell: UITextViewDelegate {
@@ -60,10 +58,11 @@ extension GameViewCell: UITextViewDelegate {
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
 		guard let str = textView.text else { return }
-		textCheck = str
-		Words.shared.userInput += textCheck!
-		print(Words.shared.userInput)
+		if str != "" {
+			chracterTextView.isUserInteractionEnabled = false
+		}
+		Words.shared.userInput += str
+		Words.shared.userCharcter = str
 		Words.shared.checkUsersInput()
 	}
 }
-

@@ -80,8 +80,8 @@
 				7015AB3E28A51B4800FC2754 /* AppDelegate.swift */,
 				7015AB4028A51B4800FC2754 /* SceneDelegate.swift */,
 				7015AB5228A51C4F00FC2754 /* View */,
-				7015AB5428A51C5B00FC2754 /* Interactor */,
 				7015AB5528A51C7400FC2754 /* Presenter */,
+				7015AB5428A51C5B00FC2754 /* Interactor */,
 				7015AB5328A51C5500FC2754 /* Entity */,
 				7015AB5628A51C7B00FC2754 /* Router */,
 				7015AB4428A51B4800FC2754 /* Main.storyboard */,
@@ -113,8 +113,8 @@
 		7015AB5428A51C5B00FC2754 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				70D5211428A73E3C00F7FC97 /* WordAPI.swift */,
 				70AAF91A28A91275005B61D2 /* Words.swift */,
+				70D5211428A73E3C00F7FC97 /* WordAPI.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
