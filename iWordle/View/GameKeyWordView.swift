@@ -10,8 +10,6 @@ import UIKit
 final class GameKeyWordView: UIView {
 	private let gameWordLabel: UILabel = {
 		let tl = UILabel()
-		// MARK: 나중에 API로 받아온 텍스트로 변경
-		tl.text = UserInput.shared.word.uppercased()
 		tl.font = UIFont.boldSystemFont(ofSize: 24)
 		tl.textColor = .black
 		return tl
@@ -38,5 +36,11 @@ final class GameKeyWordView: UIView {
 										   .bottom(padding: 10, isToSafeArea: false)],
 								inView: self)
 		gameWordLabel.setCenterX(inView: self)
+	}
+	
+	func configGameWord() {
+		DispatchQueue.main.async {
+			self.gameWordLabel.text = Words.shared.apiWord
+		}
 	}
 }
