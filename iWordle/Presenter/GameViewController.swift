@@ -57,7 +57,6 @@ final class GameViewController: UIViewController {
 		gameCollectionView.register(GameViewCell.self, forCellWithReuseIdentifier: "Cell")
 		gameCollectionView.showsVerticalScrollIndicator = false
 		gameCollectionView.showsHorizontalScrollIndicator = false
-		gameCollectionView.backgroundColor = .white
 		gameCollectionView.setAnchorTRBL(
 			top: gameKeyWordView.bottomAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor,
 			paddingTop: 10, paddingBottom: -10)
