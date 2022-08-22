@@ -139,3 +139,8 @@ enum NetworkError: Error {
 	case parseError
 	case requestError
 }
+
+extension NSNotification.Name {
+	static var textChanged: Notification.Name {
+		return .init(rawValue: "textChanged") }
+}

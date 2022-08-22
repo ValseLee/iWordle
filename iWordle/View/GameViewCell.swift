@@ -7,22 +7,19 @@
 
 import UIKit
 
-// MARK: 뷰가 아니라 뷰컨인줄. 구현 끝나면 분리 필요
 final class GameViewCell: UICollectionViewCell {
 	
-	public var userInput = Words.shared.userInput
-	
-	public let chracterTextView: UITextView = {
-		let tv = UITextView()
-		tv.backgroundColor = .systemGray4
-		tv.layer.borderColor = UIColor.black.cgColor
-		tv.layer.borderWidth = 0.5
-		tv.font = UIFont.boldSystemFont(ofSize: 16)
-		tv.autocapitalizationType = .allCharacters
-		tv.autocorrectionType = .no
-		tv.keyboardType = .alphabet
-		tv.textAlignment = .center
-		return tv
+	public let chracterTextField: UITextField = {
+		let tf = UITextField()
+		tf.backgroundColor = .systemGray4
+		tf.layer.borderColor = UIColor.black.cgColor
+		tf.layer.borderWidth = 0.5
+		tf.font = UIFont.boldSystemFont(ofSize: 16)
+		tf.autocapitalizationType = .allCharacters
+		tf.autocorrectionType = .no
+		tf.keyboardType = .alphabet
+		tf.textAlignment = .center
+		return tf
 	}()
 	
 	override func prepareForReuse() {
@@ -32,7 +29,6 @@ final class GameViewCell: UICollectionViewCell {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		configUI()
-		chracterTextView.delegate = self
 	}
 	
 	required init?(coder: NSCoder) {
@@ -40,29 +36,32 @@ final class GameViewCell: UICollectionViewCell {
 	}
 	
 	func configUI() {
-		addSubview(chracterTextView)
-		chracterTextView.setAnchorTRBL(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor)
+		addSubview(chracterTextField)
+		chracterTextField.delegate = self
+		chracterTextField.setAnchorTRBL(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor)
 	}
-	
-//	func changeTextViewUI() {
-//		
-//	}
 }
 
-extension GameViewCell: UITextViewDelegate {
-	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		guard let str = textView.text else { return true }
-		let maxLength = str.count + text.count - range.length
-		return maxLength <= 1
-	}
-	
-	func textViewDidEndEditing(_ textView: UITextView) {
-		guard let str = textView.text else { return }
-		if str != "" {
-			chracterTextView.isUserInteractionEnabled = false
+extension GameViewCell: UITextFieldDelegate {
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		guard let textFieldText = textField.text,
+			  let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+			return false
 		}
-		Words.shared.userInput += str
-		Words.shared.userCharcter = str
-		Words.shared.checkUsersInput()
+		let substringToReplace = textFieldText[rangeOfTextToReplace]
+		let count = textFieldText.count - substringToReplace.count + string.count
+		return count <= 1
+	}
+
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		guard let str = textField.text else { return }
+		if str != "" {
+			chracterTextField.isUserInteractionEnabled = false
+		}
+		
+		NotificationCenter.default.post(name: .textChanged,
+										object: (self, str),
+										userInfo: nil)
 	}
 }
+

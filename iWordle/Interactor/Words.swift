@@ -9,8 +9,8 @@ import Foundation
 
 struct Words {
 	typealias CheckSame = ([String], [String]) -> ()
-	
 	static var shared = Words()
+	
 	lazy var apiWord: String? = "DEBUG: Word hasnt Init Yet"
 	lazy var userCharcter: String? = "DEBUG: User Input is wrong"
 	private var containsString: Bool = false
@@ -32,31 +32,29 @@ struct Words {
 		}
 		
 		if containsString {
-			print("포함", userInput, userCharcter, apiWord)
+			print(#function, "포함", userInput, userCharcter, apiWord)
 		} else if !containsString {
-			print("불포함", userInput, apiWord)
+			print(#function, "불포함", userInput, apiWord)
 		}
 
 		if userInput == apiWord {
-			print("GOLDEN ANSWER")
+			print(#function, "GOLDEN ANSWER")
 			// MARK: 리셋 버튼 트리거하고 리셋 로직은 다른 곳에서 설정
 		} else if userInput.count == 5 {
 			checkPosition()
 			userInput = ""
 		}
 	}
-	
-	// MARK: 수정 많이 필요. IndexPath를 긁어올 수 없을까...?
+
 	mutating func checkPosition() {
 		guard let apiWord = apiWord else { return }
 		var userInputCharacterArray = userInput.map { String($0.uppercased()) }
 		var apiWordCharacterArray = apiWord.map { String($0) }
-		
+
 		for i in 0...4 {
 			if userInputCharacterArray[i] == apiWordCharacterArray[i] {
-				print("\(i)번째 일치")
+				print(#function, "\(i)번째 일치")
 			}
 		}
-			
 	}
 }

@@ -9,7 +9,7 @@ import UIKit
 import JGProgressHUD
 
 final class FirstViewController: UIViewController {
-	private let gameKeyWordView = GameKeyWordView()
+//	private let gameKeyWordView = GameKeyWordView()
 	
 	private let mainTitleLabel: UILabel = {
 		let la = UILabel()
@@ -63,15 +63,15 @@ final class FirstViewController: UIViewController {
 			switch result {
 				case .success(_):
 					print("Data has Setted")
+					DispatchQueue.main.async {
+						let gameScreen = GameViewController()
+						self.navigationController?.pushViewController(gameScreen, animated: true)
+						self.showLoader(false, withText: "Welcome!")
+					}
 				case .failure(let error):
 					print(error.localizedDescription)
 			}
 		}
-		showLoader(false, withText: "Welcome!")
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-			let gameScreen = GameViewController()
-			self.navigationController?.pushViewController(gameScreen, animated: true)
-		}
 	}
 }
