@@ -40,7 +40,7 @@ final class GameKeyWordView: UIView {
 	
 	func configGameWord() {
 		DispatchQueue.main.async {
-			self.gameWordLabel.text = Words.shared.apiWord
+			self.gameWordLabel.text = WordInteractor.apiWord
 		}
 	}
 }

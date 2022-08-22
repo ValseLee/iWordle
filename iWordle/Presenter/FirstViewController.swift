@@ -9,7 +9,7 @@ import UIKit
 import JGProgressHUD
 
 final class FirstViewController: UIViewController {
-	private let gameKeyWordView = GameKeyWordView()
+//	private let gameKeyWordView = GameKeyWordView()
 	
 	private let mainTitleLabel: UILabel = {
 		let la = UILabel()
