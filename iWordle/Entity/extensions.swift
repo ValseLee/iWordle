@@ -140,7 +140,7 @@ enum NetworkError: Error {
 	case requestError
 }
 
-// MARK: 커스텀 델리게이트
-protocol CustomCollectionViewCellDelegate {
-	func collectionViewCell(valueChangedIn textField: UITextField, delegatedFrom cell: GameViewCell)
+extension NSNotification.Name {
+	static var textChanged: Notification.Name {
+		return .init(rawValue: "textChanged") }
 }

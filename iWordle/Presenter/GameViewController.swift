@@ -12,6 +12,7 @@ final class GameViewController: UIViewController {
 	private let gameViewCell = GameViewCell()
 	private let gameKeyWordView = GameKeyWordView()
 	private var gameView: UICollectionView?
+	private lazy var userWord = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ final class GameViewController: UIViewController {
 		configNavBarUI(withTitle: "iWordle!", prefersLargerTitle: false, isHidden: false)
 		navigationController?.navigationBar.barStyle = .black
 		configUI()
+		setNotificationCenter()
     }
 	
 	override func viewWillLayoutSubviews() {
@@ -63,11 +65,26 @@ final class GameViewController: UIViewController {
 			top: gameKeyWordView.bottomAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor,
 			paddingTop: 10, paddingBottom: -10)
 	}
+	
+	func setNotificationCenter() {
+		NotificationCenter.default.addObserver(self, selector: #selector(textChanged), name: .textChanged, object: nil)
+	}
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.view.endEditing(true)
 	}
 	
+	// MARK: Selectors
+	@objc func textChanged(_ notification: Notification) {
+		guard let notificationData = notification.object as? (GameViewCell, String) else { return }
+		guard let gameView = gameView else { return }
+		let cell = notificationData.0
+		let userInput = notificationData.1
+		guard let indexPathRow = gameView.indexPath(for: cell)?.row else { return }
+			
+		// interactor로 넘겨서 처리
+		WordInteractor.wordChecker(indexPath: indexPathRow, userInput: userInput)
+	}
 }
 
 extension GameViewController: UICollectionViewDataSource {
@@ -77,7 +94,6 @@ extension GameViewController: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! GameViewCell
-		cell.delegate = self
 		return cell
 	}
 }
@@ -85,16 +101,5 @@ extension GameViewController: UICollectionViewDataSource {
 extension GameViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		print(#function, indexPath.row)
-	}
-}
-
-/// MARK: CUSTOM Delegate
-extension GameViewController: CustomCollectionViewCellDelegate {
-	func collectionViewCell(valueChangedIn textField: UITextField, delegatedFrom cell: GameViewCell) {
-		guard let gameView = gameView else { return }
-		if let indexPath = gameView.indexPath(for: cell),
-		   let text = textField.text, text != "" {
-			print("textField text: \(text) from cell: \(indexPath))")
-		}
 	}
 }

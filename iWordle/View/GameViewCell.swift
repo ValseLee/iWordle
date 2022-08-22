@@ -7,11 +7,7 @@
 
 import UIKit
 
-// MARK: 뷰가 아니라 뷰컨인줄. 구현 끝나면 분리 필요
 final class GameViewCell: UICollectionViewCell {
-	
-	public var userInput = Words.shared.userInput
-	public var delegate: CustomCollectionViewCellDelegate?
 	
 	public let chracterTextField: UITextField = {
 		let tf = UITextField()
@@ -23,7 +19,6 @@ final class GameViewCell: UICollectionViewCell {
 		tf.autocorrectionType = .no
 		tf.keyboardType = .alphabet
 		tf.textAlignment = .center
-		tf.addTarget(self, action: #selector(valueChanged), for: .editingDidEnd)
 		return tf
 	}()
 	
@@ -45,14 +40,6 @@ final class GameViewCell: UICollectionViewCell {
 		chracterTextField.delegate = self
 		chracterTextField.setAnchorTRBL(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor)
 	}
-	
-//	func changeTextViewUI() {
-//		
-//	}
-	
-	@objc func valueChanged(_ sender: UITextField) {
-		delegate?.collectionViewCell(valueChangedIn: chracterTextField, delegatedFrom: self)
-	}
 }
 
 extension GameViewCell: UITextFieldDelegate {
@@ -71,9 +58,10 @@ extension GameViewCell: UITextFieldDelegate {
 		if str != "" {
 			chracterTextField.isUserInteractionEnabled = false
 		}
-		Words.shared.userInput += str
-		Words.shared.userCharcter = str
-		Words.shared.checkUsersInput()
+		
+		NotificationCenter.default.post(name: .textChanged,
+										object: (self, str),
+										userInfo: nil)
 	}
 }
 
