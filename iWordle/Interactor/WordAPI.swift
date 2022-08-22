@@ -45,8 +45,12 @@ struct Network {
 			}
 			
 			// MARK: Word been setted by Singletone
-			Words.shared.setWord(wordsList: result)
-			completion(.success(Words.shared.apiWord
+//			Words.shared.setWord(wordsList: result)
+//			completion(.success(Words.shared.apiWord
+//								?? "DEBUG: api Words hasnt been setted properly"))
+			
+			WordInteractor.setWord(wordsList: result)
+			completion(.success(WordInteractor.apiWord
 								?? "DEBUG: api Words hasnt been setted properly"))
 		}
 		task.resume()
