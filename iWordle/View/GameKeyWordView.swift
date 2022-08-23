@@ -4,6 +4,8 @@
 //
 //  Created by 이승준 on 2022/08/12.
 //
+//  이 뷰는 CollectionView의 헤더를 만들면 없앨 수 있다.
+//  그렇게 해야 여기서의 싱글톤 참조를 지울 수 있다 과도한 참조는 좋지 않다.
 
 import UIKit
 
@@ -40,7 +42,7 @@ final class GameKeyWordView: UIView {
 	
 	func configGameWord() {
 		DispatchQueue.main.async {
-			self.gameWordLabel.text = WordInteractor.apiWord
+			self.gameWordLabel.text = WordInteractor.shared.apiWord
 		}
 	}
 }
