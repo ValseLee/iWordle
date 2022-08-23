@@ -9,8 +9,6 @@ import UIKit
 import JGProgressHUD
 
 final class FirstViewController: UIViewController {
-//	private let gameKeyWordView = GameKeyWordView()
-	
 	private let mainTitleLabel: UILabel = {
 		let la = UILabel()
 		la.font = .boldSystemFont(ofSize: 32)
@@ -72,6 +70,5 @@ final class FirstViewController: UIViewController {
 					print(error.localizedDescription)
 			}
 		}
-		
 	}
 }

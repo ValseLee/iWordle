@@ -12,8 +12,11 @@ final class GameViewController: UIViewController {
 	private let gameViewCell = GameViewCell()
 	private let gameKeyWordView = GameKeyWordView()
 	private var gameView: UICollectionView?
-	private lazy var userWord = ""
+	
+	// MARK: Singleton Manager
+	var wordManager = WordInteractor.shared
 
+	// MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 		view.backgroundColor = .white
@@ -27,7 +30,8 @@ final class GameViewController: UIViewController {
 		super.viewWillLayoutSubviews()
 		gameKeyWordView.configGameWord()
 	}
-
+	
+	// MARK: Methods
 	func configUI() {
 		configGameKeyWordView()
 		configGameView()
@@ -56,7 +60,6 @@ final class GameViewController: UIViewController {
 		view.addSubview(gameView)
 		gameView.dataSource = self
 		gameView.delegate = self
-
 		gameView.backgroundColor = .white
 		gameView.register(GameViewCell.self, forCellWithReuseIdentifier: "Cell")
 		gameView.showsVerticalScrollIndicator = false
@@ -83,7 +86,7 @@ final class GameViewController: UIViewController {
 		guard let indexPathRow = gameView.indexPath(for: cell)?.row else { return }
 			
 		// interactor로 넘겨서 처리
-		WordInteractor.wordChecker(indexPath: indexPathRow, userInput: userInput)
+		wordManager.wordCheck(indexPath: indexPathRow, userInput: userInput, UICollectionView: gameView)
 	}
 }
 
