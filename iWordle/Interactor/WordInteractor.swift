@@ -6,50 +6,53 @@
 //
 
 import Foundation
+import UIKit
 
-final class Words {
-	typealias CheckSame = ([String], [String]) -> ()
-	static let shared = Words()
+final class WordInteractor {
+	static let shared = WordInteractor()
 	
 	lazy var apiWord: String? = "DEBUG: Word hasnt Init Yet"
-	lazy var userCharcter: String? = "DEBUG: User Input is wrong"
-	private var containsString: Bool = false
-	private var alignSamePosition: Bool = false
-	var userInput = ""
+	lazy var cellNotifier = 1
 	
-	func setWord(wordsList: [String]) {
+	private var userCharcter = ""
+
+	public func setWord(wordsList: [String]) {
 		apiWord = wordsList.randomElement()!.uppercased()
 	}
 	
-	public func wordCheck(indexPath row: Int, userInput text: String) {
-		if text != "" {
+	public func wordCheck(indexPath row: Int, userInput userInput: String, UICollectionView gameView: UICollectionView) {
+		guard let apiWord = apiWord else { return }
+		let answer = Array(apiWord)
+		if userInput != "" {
 			switch row {
-				case 0...4:
-					userCharcter! += text
-					print(row, userCharcter!)
-				case 5...9:
-					print("?")
-				case 10...14:
-					print("else")
-				case 15...19:
-					print("??")
-				case 20...24:
-					print("???")
+				case InputLines.firstLine:
+					userCharcter += userInput
+				case InputLines.secondLine:
+					userCharcter += userInput
+				case InputLines.thirdLine:
+					userCharcter += userInput
+				case InputLines.fourthLine:
+					userCharcter += userInput
+				case InputLines.fifthLine:
+					userCharcter += userInput
 				default:
 					dump("DEBUG: 어째서 셀이 25개가 넘는가?")
 			}
 		}
-	}
-
-	func checkPosition() {
-		guard let apiWord = apiWord else { return }
-		var userInputCharacterArray = userInput.map { String($0.uppercased()) }
-		var apiWordCharacterArray = apiWord.map { String($0) }
-
-		for i in 0...4 {
-			if userInputCharacterArray[i] == apiWordCharacterArray[i] {
-				print(#function, "\(i)번째 일치")
-			}
+		
+		if userCharcter == apiWord {
+			print("Answer")
+		} else if apiWord.contains(userInput),
+				  userInput != "",
+				  answer[row % 5] == Character(userInput) {
+			print("Contains && Same Position, Background to Green")
+		} else if apiWord.contains(userInput),
+				  userInput != "",
+				  answer[row % 5] != Character(userInput) {
+			print("only Contains, Background to Yellow")
+		} else if !apiWord.contains(userInput),
+				  userInput != "" {
+			print("Doesnt Have")
 		}
 	}
 	

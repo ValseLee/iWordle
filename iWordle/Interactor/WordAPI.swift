@@ -8,9 +8,9 @@
 import Foundation
 import FirebaseFirestore
 
-struct Network {
+final class Network {
 	typealias NetworkCompletion = (Result<String, NetworkError>) -> Void
-	static var shared = Network()
+	static let shared = Network()
 	
 	// MARK: get github 5 letters word list
 	func curlWord(completion: @escaping NetworkCompletion) {
@@ -45,12 +45,8 @@ struct Network {
 			}
 			
 			// MARK: Word been setted by Singletone
-//			Words.shared.setWord(wordsList: result)
-//			completion(.success(Words.shared.apiWord
-//								?? "DEBUG: api Words hasnt been setted properly"))
-			
-			WordInteractor.setWord(wordsList: result)
-			completion(.success(WordInteractor.apiWord
+			WordInteractor.shared.setWord(wordsList: result)
+			completion(.success(WordInteractor.shared.apiWord
 								?? "DEBUG: api Words hasnt been setted properly"))
 		}
 		task.resume()
@@ -69,4 +65,6 @@ struct Network {
 			})
 		}
 	}
+	
+	private init() {}
 }
