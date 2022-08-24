@@ -144,3 +144,17 @@ extension NSNotification.Name {
 	static var textChanged: Notification.Name {
 		return .init(rawValue: "textChanged") }
 }
+
+enum InputLines {
+	static let firstLine = 0...4
+	static let secondLine = 5...9
+	static let thirdLine = 10...14
+	static let fourthLine = 15...19
+	static let fifthLine = 20...24
+	case noMatches
+}
+
+protocol WordInteractorDependency {
+	static var wordInteractorManager: WordInteractor { get }
+	static var wordApiManager: Network { get }
+}
