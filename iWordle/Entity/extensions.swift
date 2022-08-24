@@ -145,13 +145,9 @@ extension NSNotification.Name {
 		return .init(rawValue: "textChanged") }
 }
 
-enum InputLines {
-	static let firstLine = 0...4
-	static let secondLine = 5...9
-	static let thirdLine = 10...14
-	static let fourthLine = 15...19
-	static let fifthLine = 20...24
-	case noMatches
+enum InputLines: Int {
+	case firstLine = 0,
+	secondLine, thirdLine, fourthLine, fifthLine
 }
 
 protocol WordInteractorDependency {

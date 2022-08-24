@@ -9,9 +9,23 @@ import UIKit
 
 final class GameViewCell: UICollectionViewCell {
 	
-	public let chracterTextField: UITextField = {
+//	lazy var usersInput: String = "" {
+//		didSet {
+//			chracterTextField.text = ""
+//			print(usersInput)
+//			mainText.text = usersInput
+//		}
+//	}
+	
+	lazy var mainText: UILabel = {
+		let la = UILabel()
+		la.font = UIFont.boldSystemFont(ofSize: 16)
+		la.textAlignment = .center
+		return la
+	}()
+	
+	public var chracterTextField: UITextField = {
 		let tf = UITextField()
-		tf.backgroundColor = .systemGray4
 		tf.layer.borderColor = UIColor.black.cgColor
 		tf.layer.borderWidth = 0.5
 		tf.font = UIFont.boldSystemFont(ofSize: 16)
@@ -39,6 +53,13 @@ final class GameViewCell: UICollectionViewCell {
 		addSubview(chracterTextField)
 		chracterTextField.delegate = self
 		chracterTextField.setAnchorTRBL(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor)
+		
+		addSubview(mainText)
+		mainText.setAnchor(anchorTo: [.top(padding: 5, isToSafeArea: false),
+									   .bottom(padding: 5, isToSafeArea: false),
+									   .leading(padding: 5, isToSafeArea: false),
+									   .trailing(padding: 5, isToSafeArea: false)],
+							inView: self)
 	}
 }
 
@@ -64,4 +85,3 @@ extension GameViewCell: UITextFieldDelegate {
 										userInfo: nil)
 	}
 }
-
