@@ -9,7 +9,6 @@ import UIKit
 
 final class GameViewController: UIViewController {
 	
-	private let gameViewCell = GameViewCell()
 	private let gameKeyWordView = GameKeyWordView()
 	private var gameView: UICollectionView?
 	
@@ -78,6 +77,11 @@ final class GameViewController: UIViewController {
 		self.view.endEditing(true)
 	}
 	
+	func cellUpdate(indexPath: IndexPath, backgroundColor: UIColor) {
+		let cell = gameView?.cellForItem(at: indexPath)
+		cell?.backgroundColor = backgroundColor
+	}
+	
 	// MARK: Selectors
 	@objc func textChanged(_ notification: Notification) {
 		guard let notificationData = notification.object as? (GameViewCell, String) else { return }
@@ -86,8 +90,14 @@ final class GameViewController: UIViewController {
 		let userInput = notificationData.1
 		guard let indexPath = gameView.indexPath(for: cell) else { return }
 			
-		// interactor로 넘겨서 처리
-		wordManager?.wordCheck(indexPath: indexPath, userInput: userInput, UICollectionView: gameView)
+		// interactor로 넘겨서 처리, 수신
+		wordManager?.wordCheck(indexPath: indexPath, userInput: userInput, UICollectionView: gameView) { (indexPath, backgroundColor, userCharacter, userInput) in
+			self.cellUpdate(indexPath: indexPath, backgroundColor: backgroundColor)
+			if indexPath == [4,4] {
+				// MARK: 게임 종료
+				print("칸을 다 썼음, 정답 공개")
+			}
+		}
 	}
 }
 
@@ -108,6 +118,6 @@ extension GameViewController: UICollectionViewDataSource {
 
 extension GameViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		print(#function, indexPath.row)
+		print(#function, indexPath)
 	}
 }

@@ -10,49 +10,58 @@ import UIKit
 
 final class WordInteractor {
 	static let shared = WordInteractor()
+	typealias WordChecked = (_ indexPath: IndexPath,
+							 _ backgroundColor: UIColor,
+							 _ userCharacter: String,
+							 _ userInput: String) -> Void
 	
-	lazy var apiWord: String? = "DEBUG: Word hasnt Init Yet"
-	lazy var cellNotifier = 1
-	
-	private var userCharacter = ""
+	lazy var apiWord: String? = "DEBUG: Word hasnt Init Yet" {
+		didSet {
+			answer = Array(apiWord!)
+		}
+	}
+	private lazy var answer = [Character]()
+	private var userAnswer = ""
 
 	public func setWord(wordsList: [String]) {
 		apiWord = wordsList.randomElement()!.uppercased()
 	}
 	
-	public func wordCheck(indexPath indexPath: IndexPath, userInput userInput: String, UICollectionView gameView: UICollectionView) {
+	public func wordCheck(indexPath: IndexPath,
+						  userInput: String,
+						  UICollectionView gameView: UICollectionView,
+						  completion: @escaping WordChecked) {
 		guard let apiWord = apiWord else { return }
-		let answer = Array(apiWord)
+		
+		// MARK: 각 줄, 칸의 입력값을 우아하게 정리하고 싶다.
+		let line = InputLines(rawValue: indexPath.section)
+
 		if userInput != "" {
-			switch indexPath.row {
-				case InputLines.firstLine:
-					userCharacter += userInput
-				case InputLines.secondLine:
-					userCharacter += userInput
-				case InputLines.thirdLine:
-					userCharacter += userInput
-				case InputLines.fourthLine:
-					userCharacter += userInput
-				case InputLines.fifthLine:
-					userCharacter += userInput
+			switch line {
+				case .firstLine:
+					print(userInput)
+				case .secondLine:
+					print(userInput)
 				default:
-					dump("DEBUG: 어째서 셀이 25개가 넘는가?")
+					break
 			}
 		}
 		
-		if userCharacter == apiWord {
+		if userAnswer == apiWord,
+		   indexPath.row % 5 == 4 {
+			completion(indexPath, .systemGreen, userAnswer, userInput)
 			print("Answer")
 		} else if apiWord.contains(userInput),
 				  userInput != "",
 				  answer[indexPath.row % 5] == Character(userInput) {
-			print("Contains && Same Position, Background to Green")
+			completion(indexPath, .systemGreen, userAnswer, userInput)
 		} else if apiWord.contains(userInput),
 				  userInput != "",
 				  answer[indexPath.row % 5] != Character(userInput) {
-			print("only Contains, Background to Yellow")
+			completion(indexPath, .systemYellow, userAnswer, userInput)
 		} else if !apiWord.contains(userInput),
 				  userInput != "" {
-			print("Doesnt Have")
+			completion(indexPath, .systemGray4, userAnswer, userInput)
 		}
 	}
 	
