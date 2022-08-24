@@ -211,3 +211,50 @@ API 단어가 파싱되기도 전에 다음 뷰컨으로 넘어가버리고 그�
   - [ ]  각 글자의 위치와 인덱스에 해당하는 셀 컬러 바꾸기
   - [ ]  각 줄에 순서대로 글자를 입력하도록 하기
 - [ ]  문제를 다 풀이하고 나면 `reset` 버튼 만들고 처음 상태로 초기화 하기
+
+---
+
+- **22.08.24.**
+
+오늘은 카페에서 코딩을 했다.   
+집중이 평소보다 더 잘 되어서 기분이 썩 괜찮았다.   
+싱글톤 패턴에 대한 고민은 의존성 주입과 관련이 컸었다.   
+내 방식이 맞다곤 못하겠지만 여러 뷰 컨트롤러 객체가 하나의 싱글톤 객체에 접근하는 상황은 방지하도록 했다.   
+`SceneDelegate`에서 뷰 컨트롤러의 속성에 접근해서 의존성을 주입할 수 있도록 조치했다.   
+근데 여전히 싱글톤 패턴에서 벗어나지 못하고 있기 때문에... 나중에라도 의존성을 제대로 주입하는 방법을 고민해서 수정할 계획이다.   
+
+그리고 채점 로직을 구현해서 이제는 셀의 배경색도 바꿀 수 있게 됐다.   
+<img width="421" alt="스크린샷 2022-08-24 오후 10 29 58" src="https://user-images.githubusercontent.com/82270058/186431142-40d08d53-79c4-4b53-a5c6-bb6ba3dd4043.png">   
+처음엔 이 셀 배경색을 바꿔주려고 `cellForItemAt` 을 붙잡고 `reloadData()`와 `performBatchUpdate()`를 어떻게 해야 할지 씨름했다.   
+그러다 밑져야 본전이라는 생각으로 그냥 `indexPath`의 섹션과 로우에 해당하는 셀에 직접 접근해서 배경색을 바꾸었는데.. 너무 쉽게 되어 버렸다..   
+```swift
+func cellUpdate(indexPath: IndexPath, backgroundColor: UIColor) {
+	let cell = gameView?.cellForItem(at: indexPath)
+	cell?.backgroundColor = backgroundColor
+}
+
+wordManager?.wordCheck(indexPath: indexPath, userInput: userInput, UICollectionView: gameView) {
+    (indexPath, backgroundColor, userCharacter, userInput) in
+	    self.cellUpdate(indexPath: indexPath, backgroundColor: backgroundColor)
+	    if indexPath == [4,4] {
+		    // MARK: 게임 종료
+    }
+}
+```
+
+세상에.. 이렇게 쉽게 할 수 있었다니...   
+이제는 내부에서 각 `section` 에 해당하는 입력값들을 따로 저장해두고 정답과 비교해야 한다.   
+`section` 을 고려하지 않고 유저 인풋을 하나씩 저장했다가는 원하지 않는 상황에 정답이 나올 수 있기 때문.   
+열거형의 원시값이나 연관값으로 처리하려고 시도 중이다.   
+
+- 한 일
+- [x]  각 글자의 위치와 `indexPath`에 해당하는 셀 컬러 바꾸기
+
+- 해야할 일
+- [ ]  이전 `section`의 인풋이 끝나지 않으면 다음 섹션으로 넘어가지 못하도록 하기
+- [ ]  각 `section`에 해당하는 입력값을 따로 저장하되, 열거형으로 관리하기
+- [ ]  리셋 버튼 만들고 초기 상태로 되돌리기
+- [ ]  현재 화면에 보여지고 있는 정답 단어를 숨겨두기
+
+
+
