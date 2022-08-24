@@ -54,7 +54,7 @@ final class GameViewController: UIViewController {
 		)
 		flowLayout.minimumLineSpacing = 5
 		flowLayout.minimumInteritemSpacing = 0
-		flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 25, bottom: 0, right: 25)
+		flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 25, bottom: 0, right: 25)
 		
 		gameView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
 		guard let gameView = gameView else { return }
@@ -84,16 +84,20 @@ final class GameViewController: UIViewController {
 		guard let gameView = gameView else { return }
 		let cell = notificationData.0
 		let userInput = notificationData.1
-		guard let indexPathRow = gameView.indexPath(for: cell)?.row else { return }
+		guard let indexPath = gameView.indexPath(for: cell) else { return }
 			
 		// interactor로 넘겨서 처리
-		wordManager?.wordCheck(indexPath: indexPathRow, userInput: userInput, UICollectionView: gameView)
+		wordManager?.wordCheck(indexPath: indexPath, userInput: userInput, UICollectionView: gameView)
 	}
 }
 
 extension GameViewController: UICollectionViewDataSource {
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 5
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 25
+		return 5
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
