@@ -9,6 +9,8 @@ import UIKit
 import JGProgressHUD
 
 final class FirstViewController: UIViewController {
+	private var networkManager: Network?
+	
 	private let mainTitleLabel: UILabel = {
 		let la = UILabel()
 		la.font = .boldSystemFont(ofSize: 32)
@@ -30,6 +32,7 @@ final class FirstViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		networkManager = SceneDelegate.wordApiManager
 		configNavBarUI(withTitle: "", prefersLargerTitle: false, isHidden: false)
 		view.backgroundColor = .white
 		configUI()
@@ -57,7 +60,7 @@ final class FirstViewController: UIViewController {
 	// MARK: Selectors
 	@objc func startBtnTapped() {
 		showLoader(true, withText: nil)
-		Network.shared.curlWord { result in
+		networkManager?.curlWord { result in
 			switch result {
 				case .success(_):
 					print("Data has Setted")

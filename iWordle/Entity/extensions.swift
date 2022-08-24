@@ -153,3 +153,8 @@ enum InputLines {
 	static let fifthLine = 20...24
 	case noMatches
 }
+
+protocol WordInteractorDependency {
+	static var wordInteractorManager: WordInteractor { get }
+	static var wordApiManager: Network { get }
+}
