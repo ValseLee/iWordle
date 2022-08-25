@@ -9,7 +9,7 @@ import UIKit
 import JGProgressHUD
 
 final class FirstViewController: UIViewController {
-	private var networkManager: Network?
+	private let networkManager: Network
 	
 	private let mainTitleLabel: UILabel = {
 		let la = UILabel()
@@ -32,10 +32,19 @@ final class FirstViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		networkManager = SceneDelegate.wordApiManager
 		configNavBarUI(withTitle: "", prefersLargerTitle: false, isHidden: false)
 		view.backgroundColor = .white
 		configUI()
+	}
+	
+	// MARK: Initialize DI
+	init(_ dependency: Network) {
+		self.networkManager = dependency
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
 	}
 	
 	func configUI() {
@@ -60,7 +69,7 @@ final class FirstViewController: UIViewController {
 	// MARK: Selectors
 	@objc func startBtnTapped() {
 		showLoader(true, withText: nil)
-		networkManager?.curlWord { result in
+		networkManager.curlWord { result in
 			switch result {
 				case .success(_):
 					print("Data has Setted")

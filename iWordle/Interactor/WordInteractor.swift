@@ -39,9 +39,15 @@ final class WordInteractor {
 		if userInput != "" {
 			switch line {
 				case .firstLine:
-					print(userInput)
+					print(userInput, indexPath.section, indexPath.row)
 				case .secondLine:
-					print(userInput)
+					print(userInput, indexPath.section, indexPath.row)
+				case .thirdLine:
+					print(userInput, indexPath.section, indexPath.row)
+				case .fourthLine:
+					print(userInput, indexPath.section, indexPath.row)
+				case .fifthLine:
+					print(userInput, indexPath.section, indexPath.row)
 				default:
 					break
 			}

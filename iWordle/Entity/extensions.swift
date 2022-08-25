@@ -152,5 +152,4 @@ enum InputLines: Int {
 
 protocol WordInteractorDependency {
 	static var wordInteractorManager: WordInteractor { get }
-	static var wordApiManager: Network { get }
 }

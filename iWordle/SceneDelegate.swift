@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		window = UIWindow(windowScene: scene)
-		let nav = UINavigationController(rootViewController: FirstViewController())
+		let nav = UINavigationController(rootViewController: FirstViewController(Network()))
 		window?.rootViewController = nav
 		window?.makeKeyAndVisible()
 	}
@@ -54,9 +54,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate: WordInteractorDependency {
 	static var wordInteractorManager: WordInteractor {
 		return WordInteractor.shared
-	}
-	
-	static var wordApiManager: Network {
-		return Network.shared
 	}
 }
