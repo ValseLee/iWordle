@@ -130,6 +130,25 @@ extension UIViewController {
 		navigationController?.navigationBar.isHidden = isHidden
 		navigationItem.title = title
 	}
+	
+	func configUICollectionView(inViewController viewController: UIViewController,
+								inView view: UIView,
+								output: inout UICollectionView?) {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(
+			width: view.frame.size.width / 6,
+			height: view.frame.size.width / 6)
+		flowLayout.minimumLineSpacing = 5
+		flowLayout.minimumInteritemSpacing = 0
+		flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 25, bottom: 0, right: 25)
+		
+		output = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+		guard let output = output else { return }
+		view.addSubview(output)
+		output.backgroundColor = .white
+		output.showsVerticalScrollIndicator = false
+		output.showsHorizontalScrollIndicator = false
+	}
 }
 
 // MARK: Error 처리
@@ -140,16 +159,22 @@ enum NetworkError: Error {
 	case requestError
 }
 
+// MARK: NotificationCenter Name Extension
 extension NSNotification.Name {
 	static var textChanged: Notification.Name {
-		return .init(rawValue: "textChanged") }
+		return .init(rawValue: "textChanged")
+	}
+	
+	static var userWin: Notification.Name {
+		return .init(rawValue: "userWin")
+	}
+	
+	static var userLose: Notification.Name {
+		return .init(rawValue: "userLose")
+	}
 }
 
-enum InputLines: Int {
-	case firstLine = 0,
-	secondLine, thirdLine, fourthLine, fifthLine
-}
-
+// MARK: Dependency
 protocol WordInteractorDependency {
 	static var wordInteractorManager: WordInteractor { get }
 }
