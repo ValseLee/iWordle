@@ -72,7 +72,6 @@ final class FirstViewController: UIViewController {
 		networkManager.curlWord { result in
 			switch result {
 				case .success(_):
-					print("Data has Setted")
 					DispatchQueue.main.async {
 						let gameScreen = GameViewController()
 						self.navigationController?.pushViewController(gameScreen, animated: true)

@@ -16,6 +16,7 @@
 		7015AB5D28A51F6800FC2754 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB5C28A51F6800FC2754 /* extensions.swift */; };
 		7015AB6528A52B4100FC2754 /* GameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB6428A52B4100FC2754 /* GameViewCell.swift */; };
 		7015AB6728A52CC800FC2754 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7015AB6628A52CC800FC2754 /* GameViewController.swift */; };
+		7054435428B794C6003F0DBD /* WordCheckLogicEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054435328B794C6003F0DBD /* WordCheckLogicEnum.swift */; };
 		7064FA9028A90F01000D5A4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7064FA8F28A90F01000D5A4D /* GoogleService-Info.plist */; };
 		708EA3F028A678EA00C7FE63 /* GameKeyWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */; };
 		70AAF91B28A91275005B61D2 /* WordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AAF91A28A91275005B61D2 /* WordInteractor.swift */; };
@@ -37,6 +38,7 @@
 		7015AB5C28A51F6800FC2754 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		7015AB6428A52B4100FC2754 /* GameViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewCell.swift; sourceTree = "<group>"; };
 		7015AB6628A52CC800FC2754 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		7054435328B794C6003F0DBD /* WordCheckLogicEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCheckLogicEnum.swift; sourceTree = "<group>"; };
 		7064FA8F28A90F01000D5A4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		708EA3EF28A678EA00C7FE63 /* GameKeyWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKeyWordView.swift; sourceTree = "<group>"; };
 		70AAF91A28A91275005B61D2 /* WordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordInteractor.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				7015AB5C28A51F6800FC2754 /* extensions.swift */,
+				7054435328B794C6003F0DBD /* WordCheckLogicEnum.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				708EA3F028A678EA00C7FE63 /* GameKeyWordView.swift in Sources */,
 				70D5211528A73E3C00F7FC97 /* WordAPI.swift in Sources */,
 				70AAF91B28A91275005B61D2 /* WordInteractor.swift in Sources */,
+				7054435428B794C6003F0DBD /* WordCheckLogicEnum.swift in Sources */,
 				7015AB5D28A51F6800FC2754 /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
