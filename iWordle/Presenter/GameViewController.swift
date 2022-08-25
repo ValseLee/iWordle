@@ -12,6 +12,18 @@ final class GameViewController: UIViewController {
 	private let gameKeyWordView = GameKeyWordView()
 	private var gameView: UICollectionView?
 	
+	private let resetBtn: UIButton = {
+		let btn = UIButton(type: .system)
+		btn.backgroundColor = .systemGreen
+		btn.setTitle("Reset", for: .normal)
+		btn.setTitleColor(UIColor.white, for: .normal)
+		btn.titleLabel?.font = UIFont.systemFont(ofSize: 28)
+		btn.layer.cornerRadius = 75 / 2
+		btn.clipsToBounds = true
+		btn.addTarget(self, action: #selector(resetBtnTapped), for: .touchUpInside)
+		return btn
+	}()
+	
 	// MARK: Singleton Manager
 	private var wordManager: WordInteractor?
 
@@ -24,17 +36,20 @@ final class GameViewController: UIViewController {
 		setNotificationCenter()
     }
 	
-	override func viewWillLayoutSubviews() {
-		super.viewWillLayoutSubviews()
-		gameKeyWordView.configGameWord()
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		NotificationCenter.default.removeObserver(self, name: .textChanged, object: nil)
+		NotificationCenter.default.removeObserver(self, name: .userWin, object: nil)
+		NotificationCenter.default.removeObserver(self, name: .userLose, object: nil)
 	}
-	
+
 	// MARK: Methods
 	func configUI() {
-		configNavBarUI(withTitle: "iWordle!", prefersLargerTitle: false, isHidden: false)
+		configNavBarUI(withTitle: "iWordle", prefersLargerTitle: false, isHidden: false)
 		navigationController?.navigationBar.barStyle = .black
 		configGameKeyWordView()
 		configGameView()
+		configResetBtn()
 	}
 	
 	func configGameKeyWordView() {
@@ -46,39 +61,37 @@ final class GameViewController: UIViewController {
 	}
 	
 	func configGameView() {
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(
-			width: view.frame.size.width / 6,
-			height: view.frame.size.width / 6
-		)
-		flowLayout.minimumLineSpacing = 5
-		flowLayout.minimumInteritemSpacing = 0
-		flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 25, bottom: 0, right: 25)
-		
-		gameView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-		guard let gameView = gameView else { return }
-		view.addSubview(gameView)
+		configUICollectionView(inViewController: self, inView: view, output: &gameView)
+		guard let gameView = gameView else { return	}
+		gameView.register(GameViewCell.self, forCellWithReuseIdentifier: "Cell")
 		gameView.dataSource = self
 		gameView.delegate = self
-		gameView.backgroundColor = .white
-		gameView.register(GameViewCell.self, forCellWithReuseIdentifier: "Cell")
-		gameView.showsVerticalScrollIndicator = false
-		gameView.showsHorizontalScrollIndicator = false
 		gameView.setAnchorTRBL(
 			top: gameKeyWordView.bottomAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor,
-			paddingTop: 10, paddingBottom: -10)
+			paddingTop: 10, paddingBottom: -150)
+	}
+	
+	func configResetBtn() {
+		view.addSubview(resetBtn)
+		resetBtn.setAnchorTRBL(bottom: view.safeAreaLayoutGuide.bottomAnchor,
+							   paddingBottom: 75)
+		resetBtn.setCenterX(inView: view)
+		resetBtn.setSize(height: 75, width: 250)
 	}
 	
 	func setNotificationCenter() {
 		NotificationCenter.default.addObserver(self, selector: #selector(textChanged), name: .textChanged, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateByUserWin), name: .userWin, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateByUserLose), name: .userLose, object: nil)
 	}
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.view.endEditing(true)
 	}
 	
-	func cellUpdate(indexPath: IndexPath, backgroundColor: UIColor) {
-		let cell = gameView?.cellForItem(at: indexPath)
+	func updateViewBackgroundColor(indexPath: IndexPath, backgroundColor: UIColor) {
+		guard let gameView = gameView else { return }
+		let cell = gameView.cellForItem(at: indexPath)
 		cell?.backgroundColor = backgroundColor
 	}
 	
@@ -91,13 +104,29 @@ final class GameViewController: UIViewController {
 		guard let indexPath = gameView.indexPath(for: cell) else { return }
 			
 		// interactor로 넘겨서 처리, 수신
-		wordManager?.wordCheck(indexPath: indexPath, userInput: userInput, UICollectionView: gameView) { (indexPath, backgroundColor, userCharacter, userInput) in
-			self.cellUpdate(indexPath: indexPath, backgroundColor: backgroundColor)
-			if indexPath == [4,4] {
-				// MARK: 게임 종료
-				print("칸을 다 썼음, 정답 공개")
-			}
+		wordManager?.wordCheck(indexPath: indexPath, userInput: userInput, UICollectionView: gameView) { (indexPath, backgroundColor) in
+			guard let backgroundColor = backgroundColor else { return }
+			self.updateViewBackgroundColor(indexPath: indexPath, backgroundColor: backgroundColor)
 		}
+	}
+	
+	@objc func updateByUserWin(_ notification: Notification) {
+		let word = notification.object as? String ?? ""
+		gameKeyWordView.setAnswerWord(answer: word)
+		gameKeyWordView.setSubLabel(hasWon: true)
+	}
+	
+	@objc func updateByUserLose(_ notification: Notification) {
+		let word = notification.object as? String ?? ""
+		gameKeyWordView.setAnswerWord(answer: word)
+		gameKeyWordView.setSubLabel(hasWon: false)
+	}
+	
+	@objc func resetBtnTapped() {
+		NotificationCenter.default.removeObserver(self, name: .textChanged, object: nil)
+		NotificationCenter.default.removeObserver(self, name: .userWin, object: nil)
+		NotificationCenter.default.removeObserver(self, name: .userLose, object: nil)
+		self.navigationController?.popViewController(animated: true)
 	}
 }
 
@@ -118,6 +147,6 @@ extension GameViewController: UICollectionViewDataSource {
 
 extension GameViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		print(#function, indexPath)
+		print(#function)
 	}
 }

@@ -4,17 +4,24 @@
 //
 //  Created by 이승준 on 2022/08/12.
 //
-//  이 뷰는 CollectionView의 헤더를 만들면 없앨 수 있다.
-//  그렇게 해야 여기서의 싱글톤 참조를 지울 수 있다 과도한 참조는 좋지 않다.
 
 import UIKit
 
 final class GameKeyWordView: UIView {
+	
 	private let gameWordLabel: UILabel = {
 		let tl = UILabel()
 		tl.font = UIFont.boldSystemFont(ofSize: 24)
+		tl.text = "?????"
 		tl.textColor = .black
 		return tl
+	}()
+	
+	private let subLabel: UILabel = {
+		let la = UILabel()
+		la.font = UIFont.boldSystemFont(ofSize: 16)
+		la.textColor = .black
+		return la
 	}()
 	
 	override init(frame: CGRect) {
@@ -27,12 +34,13 @@ final class GameKeyWordView: UIView {
 	}
 	
 	// MARK: Need Config UI
-	func configUI() {
+	private func configUI() {
 		backgroundColor = .white
 		configGameWordLabel()
+		configSubLabel()
 	}
 	
-	func configGameWordLabel() {
+	private func configGameWordLabel() {
 		addSubview(gameWordLabel)
 		gameWordLabel.setAnchor(anchorTo: [.top(padding: 10, isToSafeArea: true),
 										   .bottom(padding: 10, isToSafeArea: false)],
@@ -40,9 +48,22 @@ final class GameKeyWordView: UIView {
 		gameWordLabel.setCenterX(inView: self)
 	}
 	
-	func configGameWord() {
-		DispatchQueue.main.async {
-			self.gameWordLabel.text = WordInteractor.shared.apiWord
+	private func configSubLabel() {
+		addSubview(subLabel)
+		subLabel.setAnchor(anchorTo: [.bottom(padding: 10, isToSafeArea: false)],
+						   inView: self)
+		subLabel.setCenterX(inView: self)
+	}
+	
+	func setAnswerWord(answer: String) {
+		self.gameWordLabel.text = answer
+	}
+	
+	func setSubLabel(hasWon: Bool) {
+		if hasWon == true {
+			self.subLabel.text = "Conglatulations!✨"
+		} else if hasWon == false {
+			self.subLabel.text = "Maybe Next Time..👋🏻"
 		}
 	}
 }
