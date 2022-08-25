@@ -256,5 +256,61 @@ wordManager?.wordCheck(indexPath: indexPath, userInput: userInput, UICollectionV
 - [ ]  리셋 버튼 만들고 초기 상태로 되돌리기
 - [ ]  현재 화면에 보여지고 있는 정답 단어를 숨겨두기
 
+---
 
+- **22.08.25.**
 
+오늘은 드디어 필요한 기능을 구현했다.   
+하고 싶었던 열거형도 적용해서 연관값으로 각 줄의 입력값을 정리할 수 있었다.   
+원시값이랑 연관값을 같이 못 써서 골치 아팠었는데, 생각해보니 열거형 `init()`을 정의하면 되는 일이었다.   
+2차원 배열로 만들어서 `section`의 줄마다 `row`에 해당하는 5개짜리 빈 배열에 값을 넣어주었다.   
+이렇게 구현하면, 굳이 다른 섹션의 입력을 금지할 필요가 없다!!   
+
+```swift
+
+// MARK: Enum Init
+init(line: Int, userInput: String) {
+	switch line {
+		case 0:
+			self = .firstLine(userInput: userInput)
+		case 1:
+			self = .secondLine(userInput: userInput)
+		case 2:
+			self = .thirdLine(userInput: userInput)
+		case 3:
+			self = .fourthLine(userInput: userInput)
+		case 4:
+			self = .fifthLine(userInput: userInput)
+		default:
+			self = .error
+			break
+	}
+}
+
+// MARK: Interactor
+let line = InputLines(line: indexPath.section, userInput: userInput)
+switch line {
+	case .firstLine:
+		inputArrays[indexPath.section][indexPath.row] = line.getCellInput(userInput)
+		if !inputArrays[indexPath.section].contains("") { chance -= 1 }
+
+		let backgroundColor = answerCheck(userWord: inputArrays[indexPath.section], userInput: userInput, indexPath: indexPath)
+		completion(indexPath, backgroundColor)
+}
+```
+
+필요없는 코드들을 삭제했고 정답 여부에 따른 후처리를 구현했다.   
+`NotificationCenter`도 각 상황에 맞게 적용하고 화면 전환에 따라 지우는 로직도 추가했다.   
+이제 정말 끝이 보인다.   
+조금만 더 힘내서 마무리해보자!   
+
+- 한 일
+- [x]  각 `section`에 해당하는 입력값을 따로 저장하되, 열거형으로 관리하기
+- [x]  리셋 버튼 만들고 초기 상태로 되돌리기
+- [x]  현재 화면에 보여지고 있는 정답 단어를 숨겨두기
+
+- 해야할 일
+- [ ]  코드 리팩토링
+	- [ ]  필요 없는 코드 정리해서 버리기
+	- [ ]  VIPER 아키텍쳐에 맞게 `Router` 제대로 구현하기
+	- [ ]  의존성 주입 올바르게 구현하기
