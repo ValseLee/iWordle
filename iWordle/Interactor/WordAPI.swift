@@ -10,7 +10,6 @@ import FirebaseFirestore
 
 final class Network {
 	typealias NetworkCompletion = (Result<String, NetworkError>) -> Void
-	static let shared = Network()
 	
 	// MARK: get github 5 letters word list
 	func curlWord(completion: @escaping NetworkCompletion) {
@@ -66,5 +65,4 @@ final class Network {
 		}
 	}
 	
-	private init() {}
 }
