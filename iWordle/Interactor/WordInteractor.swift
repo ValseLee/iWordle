@@ -17,13 +17,12 @@ final class WordInteractor {
 	lazy var apiWord: String? = "DEBUG: Word hasnt Init Yet" {
 		didSet {
 			answer = Array(apiWord!)
+//			print(answer)
 		}
 	}
 	
 	private lazy var answer = [Character]()
-	private lazy var inputArrays: [[String]] = Array(repeating:
-														Array(repeating: "", count: 5),
-													 count: 5)
+	private lazy var inputArrays: [[String]] = Array(repeating: Array(repeating: "", count: 5), count: 5)
 	private lazy var chance = 5
 	private var userAnswer = ""
 
@@ -42,33 +41,33 @@ final class WordInteractor {
 				case .firstLine:
 					inputArrays[indexPath.section][indexPath.row] = line.getCellInput(userInput)
 					if !inputArrays[indexPath.section].contains("") { chance -= 1 }
-					
 					let backgroundColor = answerCheck(userWord: inputArrays[indexPath.section], userInput: userInput, indexPath: indexPath)
 					completion(indexPath, backgroundColor)
+					
 				case .secondLine:
 					inputArrays[indexPath.section][indexPath.row] = line.getCellInput(userInput)
 					if !inputArrays[indexPath.section].contains("") { chance -= 1 }
-					
 					let backgroundColor = answerCheck(userWord: inputArrays[indexPath.section], userInput: userInput, indexPath: indexPath)
 					completion(indexPath, backgroundColor)
+					
 				case .thirdLine:
 					inputArrays[indexPath.section][indexPath.row] = line.getCellInput(userInput)
 					if !inputArrays[indexPath.section].contains("") { chance -= 1 }
-					
 					let backgroundColor = answerCheck(userWord: inputArrays[indexPath.section], userInput: userInput, indexPath: indexPath)
 					completion(indexPath, backgroundColor)
+					
 				case .fourthLine:
 					inputArrays[indexPath.section][indexPath.row] = line.getCellInput(userInput)
 					if !inputArrays[indexPath.section].contains("") { chance -= 1 }
-					
 					let backgroundColor = answerCheck(userWord: inputArrays[indexPath.section], userInput: userInput, indexPath: indexPath)
 					completion(indexPath, backgroundColor)
+					
 				case .fifthLine:
 					inputArrays[indexPath.section][indexPath.row] = line.getCellInput(userInput)
 					if !inputArrays[indexPath.section].contains("") { chance -= 1 }
-					
 					let backgroundColor = answerCheck(userWord: inputArrays[indexPath.section], userInput: userInput, indexPath: indexPath)
 					completion(indexPath, backgroundColor)
+					
 				default:
 					break
 			}
@@ -106,6 +105,12 @@ final class WordInteractor {
 			return .systemGray4
 		}
 		return .systemGray4
+	}
+	
+	func resetWordInteractor() {
+		inputArrays = Array(repeating: Array(repeating: "", count: 5), count: 5)
+		chance = 5
+		userAnswer = ""
 	}
 	
 	private init() {}

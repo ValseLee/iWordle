@@ -56,14 +56,19 @@ final class GameKeyWordView: UIView {
 	}
 	
 	func setAnswerWord(answer: String) {
-		self.gameWordLabel.text = answer
+		gameWordLabel.text = answer
 	}
 	
 	func setSubLabel(hasWon: Bool) {
 		if hasWon == true {
-			self.subLabel.text = "Conglatulations!✨"
+			subLabel.text = "Conglatulations!✨"
 		} else if hasWon == false {
-			self.subLabel.text = "Maybe Next Time..👋🏻"
+			subLabel.text = "Maybe Next Time..👋🏻"
 		}
+	}
+	
+	func resetKeyWordView() {
+		gameWordLabel.text = "?????"
+		subLabel.text = ""
 	}
 }

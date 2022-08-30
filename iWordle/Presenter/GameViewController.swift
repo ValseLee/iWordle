@@ -41,6 +41,7 @@ final class GameViewController: UIViewController {
 		NotificationCenter.default.removeObserver(self, name: .textChanged, object: nil)
 		NotificationCenter.default.removeObserver(self, name: .userWin, object: nil)
 		NotificationCenter.default.removeObserver(self, name: .userLose, object: nil)
+		wordManager?.resetWordInteractor()
 	}
 
 	// MARK: Methods
@@ -123,9 +124,6 @@ final class GameViewController: UIViewController {
 	}
 	
 	@objc func resetBtnTapped() {
-		NotificationCenter.default.removeObserver(self, name: .textChanged, object: nil)
-		NotificationCenter.default.removeObserver(self, name: .userWin, object: nil)
-		NotificationCenter.default.removeObserver(self, name: .userLose, object: nil)
 		self.navigationController?.popViewController(animated: true)
 	}
 }
